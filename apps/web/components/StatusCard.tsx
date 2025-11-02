@@ -1,15 +1,24 @@
 "use client";
+
 import { useNeihonHealth, useNeihonRoot } from "@/hooks/useNeihon";
+
 import { Card } from "./Card";
+import { StatusPill } from "./StatusPill";
 
 export default function StatusCard() {
-  const { data: health, error: healthErr, loading: healthLoading } = useNeihonHealth();
+  const { data: health, error: healthErr, loading: healthLoading, latency } = useNeihonHealth();
   const { data: root, error: rootErr, loading: rootLoading } = useNeihonRoot();
+
+  const ok = !!health?.ok && !healthErr;
 
   return (
     <Card>
       <div className="max-w-xl w-full p-6">
-        <h2 className="text-xl font-semibold mb-3">Neihon API</h2>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h2 className="text-xl font-semibold">Neihon API</h2>
+          <StatusPill ok={ok} ms={latency ?? null} />
+        </div>
+
         <div className="text-sm text-brand-mute mb-4">
           Base URL:{" "}
           <code className="px-2 py-1 rounded-lg bg-black/40 border border-white/10">

@@ -1,24 +1,24 @@
-import Link from "next/link";
-
-import { Badge } from "./Badge";
-import { Button } from "./Button";
-
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-30 w-full border-b border-white/10 bg-[rgba(8,10,14,0.6)] backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="h-6 w-6 rounded-full bg-brand-gold" />
+        <a href="/" className="flex items-center gap-2">
+          <img src="/logo.svg" alt="Neihon logo" className="h-6 w-6" />
           <span className="text-sm tracking-widest text-brand-mute">NEIHON</span>
-        </Link>
-        <nav className="flex items-center gap-3">
-          <Badge>Live</Badge>
-          <Link href="https://neihon-api.onrender.com/docs" target="_blank" rel="noreferrer">
-            <Button variant="ghost">API Docs</Button>
-          </Link>
-          <Link href="https://neihon-api.onrender.com" target="_blank" rel="noreferrer">
-            <Button>Open API</Button>
-          </Link>
+        </a>
+        <nav className="flex items-center gap-4">
+          <a href="/" className="text-sm text-brand-mute hover:text-brand-text">
+            Home
+          </a>
+          <a href="/docs" className="text-sm text-brand-mute hover:text-brand-text">
+            Docs
+          </a>
+          <a href="/playground" className="text-sm text-brand-mute hover:text-brand-text">
+            Playground
+          </a>
+          <a href="https://neihon-api.onrender.com/docs" target="_blank" rel="noreferrer" className="text-sm text-brand-mute hover:text-brand-text">
+            API Docs
+          </a>
         </nav>
       </div>
     </header>

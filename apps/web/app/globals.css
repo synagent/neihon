@@ -13,7 +13,9 @@
 
 html,body{height:100%}
 body{
-  background: radial-gradient(80% 60% at 50% 0%, rgba(212,175,55,.05), transparent 60%), var(--brand-bg);
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(212,175,55,.05), transparent 60%),
+    var(--brand-bg);
   color:var(--brand-text);
 }
 pre{background:#0b1220;color:#e6edf7;padding:1rem;border-radius:.75rem;border:1px solid #1a2333;overflow:auto}
