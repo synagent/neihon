@@ -18,6 +18,9 @@ export default function Navbar() {
           <a href="/playground" className="text-sm text-brand-mute hover:text-brand-text">
             Playground
           </a>
+          <a href="/auth" className="text-sm text-brand-mute hover:text-brand-text">
+            Sign in
+          </a>
           <a href="https://neihon-api.onrender.com/docs" target="_blank" rel="noreferrer" className="text-sm text-brand-mute hover:text-brand-text">
             API Docs
           </a>

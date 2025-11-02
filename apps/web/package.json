@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@upstash/ratelimit": "^1.1.1",
+    "@upstash/redis": "^1.31.3",
     "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1"

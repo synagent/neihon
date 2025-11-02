@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StatusCard from "@/components/StatusCard";
+import ServiceMap from "@/components/ServiceMap";
+import RoleBadge from "@/components/RoleBadge";
 
 export default function Page() {
   return (
@@ -23,11 +25,20 @@ export default function Page() {
               Open Playground
             </a>
           </div>
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-brand-mute">
+            <span>Roles:</span>
+            <RoleBadge role="Admin" />
+            <RoleBadge role="Maintainer" />
+            <RoleBadge role="Viewer" />
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-16 flex items-center justify-center">
-        <StatusCard />
+      <section className="mx-auto max-w-6xl px-4 pb-16 space-y-8">
+        <div className="flex items-center justify-center">
+          <StatusCard />
+        </div>
+        <ServiceMap />
       </section>
 
       <Footer />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CopyButton from "@/components/CopyButton";
 
@@ -13,8 +13,43 @@ export default function Playground() {
   const [out, setOut] = useState<string>("");
   const [ms, setMs] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [useProxy, setUseProxy] = useState(false);
+  const [origin, setOrigin] = useState("");
 
   const url = `${base}${path}`;
+  const proxyUrl = `/api/proxy?path=${encodeURIComponent(path)}`;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (method !== "GET" && useProxy) {
+      setUseProxy(false);
+    }
+  }, [method, useProxy]);
+
+  const actualMethod = useProxy ? "GET" : method;
+  const targetUrl = useProxy ? proxyUrl : url;
+  const curlTarget = useProxy ? (origin ? `${origin}${proxyUrl}` : proxyUrl) : url;
+
+  const curl = [
+    "curl",
+    "-s",
+    "-X",
+    actualMethod,
+    `"${curlTarget}"`,
+    ...(!useProxy && token.trim() ? ["-H", `"Authorization: Bearer ${token.trim()}"`] : []),
+    "-H",
+    "\"Accept: application/json\"",
+    ...(!useProxy && actualMethod !== "GET" && actualMethod !== "DELETE" && body.trim()
+      ? ["-H", `"Content-Type: application/json"`, "-d", `'${body.replace(/'/g, "'\\''")}'`]
+      : [])
+  ].join(" ");
+
+  const displayUrl = useProxy ? curlTarget : url;
 
   async function run() {
     setLoading(true);
@@ -23,17 +58,17 @@ export default function Playground() {
     const t0 = performance.now();
     try {
       const headers: Record<string, string> = { Accept: "application/json" };
-      if (token.trim()) {
+      if (!useProxy && token.trim()) {
         headers.Authorization = `Bearer ${token.trim()}`;
       }
 
-      const init: RequestInit = { method, headers, cache: "no-store" };
-      if (method !== "GET" && method !== "DELETE" && body.trim()) {
+      const init: RequestInit = { method: actualMethod, headers, cache: "no-store" };
+      if (!useProxy && actualMethod !== "GET" && actualMethod !== "DELETE" && body.trim()) {
         headers["Content-Type"] = "application/json";
         init.body = body;
       }
 
-      const res = await fetch(url, init);
+      const res = await fetch(targetUrl, init);
       const txt = await res.text();
       const t1 = performance.now();
       setMs(Math.round(t1 - t0));
@@ -50,20 +85,6 @@ export default function Playground() {
       setLoading(false);
     }
   }
-
-  const curl = [
-    "curl",
-    "-s",
-    "-X",
-    method,
-    `"${url}"`,
-    ...(token.trim() ? ["-H", `"Authorization: Bearer ${token.trim()}"`] : []),
-    "-H",
-    `"Accept: application/json"`,
-    ...(method !== "GET" && method !== "DELETE" && body.trim()
-      ? ["-H", `"Content-Type: application/json"`, "-d", `'${body.replace(/'/g, "'\\''")}'`]
-      : [])
-  ].join(" ");
 
   return (
     <main className="mx-auto max-w-4xl p-6 space-y-6">
@@ -113,7 +134,7 @@ export default function Playground() {
             className="px-4 py-2 rounded-2xl text-sm font-medium bg-brand-gold text-black hover:opacity-90 disabled:opacity-60"
             type="button"
           >
-            {loading ? "Running…" : `Send ${method}`}
+            {loading ? "Running…" : `Send ${actualMethod}`}
           </button>
           <div className="text-xs text-brand-mute break-all font-mono flex-1">
             <div className="flex items-center justify-between gap-2">
@@ -124,7 +145,17 @@ export default function Playground() {
           </div>
         </div>
 
-        <div className="mt-4 text-xs text-brand-mute break-all">{url}</div>
+        <label className="mt-3 inline-flex items-center gap-2 text-sm text-brand-mute">
+          <input
+            type="checkbox"
+            checked={useProxy}
+            onChange={(e) => setUseProxy(e.target.checked)}
+            disabled={method !== "GET"}
+          />
+          Use proxy (GET only; avoid CORS / enable rate limits)
+        </label>
+
+        <div className="mt-4 text-xs text-brand-mute break-all">{displayUrl}</div>
         <div className="mt-2 text-xs text-brand-mute">{ms !== null && <>Latency: {ms}ms</>}</div>
 
         <div className="mt-4 relative">
