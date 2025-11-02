@@ -7,7 +7,20 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Neihon — Live API, Docs & Playground",
   description: "Live health, human-readable documentation, and a safe API playground.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  themeColor: "#0b0d10",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-16x16.png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", sizes: "32x32" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }]
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "msapplication-config": "/browserconfig.xml"
+  },
   openGraph: {
     title: "Neihon",
     description: "Live health, documentation, and an API playground.",
