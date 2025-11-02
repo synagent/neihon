@@ -23,4 +23,9 @@ def health() -> dict[str, bool]:
     return {"ok": True}
 
 
+@app.get("/")
+def home() -> dict[str, str]:
+    return {"service": "Neihon API", "status": "live", "docs": "/docs"}
+
+
 app.include_router(plan.router)
