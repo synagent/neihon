@@ -3,6 +3,7 @@
 import { useNeihonHealth, useNeihonRoot } from "@/hooks/useNeihon";
 
 import { Card } from "./Card";
+import { Skeleton } from "./Skeleton";
 import { StatusPill } from "./StatusPill";
 
 export default function StatusCard() {
@@ -29,16 +30,24 @@ export default function StatusCard() {
         <div className="space-y-4">
           <section>
             <h3 className="font-medium text-brand-text/90">/health</h3>
-            {healthLoading && <p>Checking…</p>}
-            {healthErr && <p className="text-red-400">Error: {healthErr}</p>}
-            {health && <pre>{JSON.stringify(health, null, 2)}</pre>}
+            {healthLoading ? (
+              <Skeleton className="h-20" />
+            ) : health ? (
+              <pre>{JSON.stringify(health, null, 2)}</pre>
+            ) : (
+              <p className="text-brand-mute">{healthErr ? `No data • ${healthErr}` : "No data"}</p>
+            )}
           </section>
 
           <section>
             <h3 className="font-medium text-brand-text/90">/</h3>
-            {rootLoading && <p>Loading…</p>}
-            {rootErr && <p className="text-red-400">Error: {rootErr}</p>}
-            {root && <pre>{JSON.stringify(root, null, 2)}</pre>}
+            {rootLoading ? (
+              <Skeleton className="h-20" />
+            ) : root ? (
+              <pre>{JSON.stringify(root, null, 2)}</pre>
+            ) : (
+              <p className="text-brand-mute">{rootErr ? `No data • ${rootErr}` : "No data"}</p>
+            )}
           </section>
         </div>
       </div>

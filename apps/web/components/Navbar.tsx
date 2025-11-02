@@ -1,3 +1,5 @@
+import ThemeToggle from "./ThemeToggle";
+
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-30 w-full border-b border-white/10 bg-[rgba(8,10,14,0.6)] backdrop-blur">
@@ -19,6 +21,7 @@ export default function Navbar() {
           <a href="https://neihon-api.onrender.com/docs" target="_blank" rel="noreferrer" className="text-sm text-brand-mute hover:text-brand-text">
             API Docs
           </a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
