@@ -1,13 +1,11 @@
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-export const metadata = {
-  title: "Neihon",
-  description: "Neihon frontend hooked to Render API"
-};
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body className="min-h-screen">{children}</body>
     </html>
   );
