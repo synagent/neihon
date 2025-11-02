@@ -4,6 +4,8 @@ import { useMemo, useState } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+export const API_BASE = 'https://neihon-api.onrender.com';
+
 import { AddTaskScreen } from './src/screens/AddTaskScreen';
 import { FocusScreen } from './src/screens/FocusScreen';
 import { PlanReviewScreen } from './src/screens/PlanReviewScreen';
