@@ -18,6 +18,9 @@ export default function Navbar() {
           <a href="/playground" className="text-sm text-brand-mute hover:text-brand-text">
             Playground
           </a>
+          <a href="/calendar" className="text-sm text-brand-mute hover:text-brand-text">
+            Calendar
+          </a>
           <a href="/auth" className="text-sm text-brand-mute hover:text-brand-text">
             Sign in
           </a>
