@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    container_name: neihon-postgres
+    environment:
+      POSTGRES_DB: neihon
+      POSTGRES_USER: neihon_user
+      POSTGRES_PASSWORD: neihon_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - neihon_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d neihon -U neihon_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  neihon_postgres_data:
+    name: neihon_postgres_data
