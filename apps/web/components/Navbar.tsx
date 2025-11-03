@@ -21,6 +21,9 @@ export default function Navbar() {
           <a href="/calendar" className="text-sm text-brand-mute hover:text-brand-text">
             Calendar
           </a>
+          <a href="/tasks/new" className="text-sm text-brand-mute hover:text-brand-text">
+            New Task
+          </a>
           <a href="/auth" className="text-sm text-brand-mute hover:text-brand-text">
             Sign in
           </a>
