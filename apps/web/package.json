@@ -3,13 +3,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-icons.mjs || echo 'skip icons'",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
     "@upstash/ratelimit": "^1.1.1",
     "@upstash/redis": "^1.31.3",
+    "framer-motion": "^11.1.7",
+    "lucide-react": "^0.461.0",
     "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1"

@@ -1,31 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root,[data-theme="dark"]{
-  --brand-bg:#0b0d10;
-  --brand-panel:#0f1319;
-  --brand-ring:#273245;
-  --brand-text:#e7ecf3;
-  --brand-mute:#9aa3b2;
-  --brand-gold:#d4af37;
-}
-[data-theme="light"]{
-  --brand-bg:#f7f8fa;
-  --brand-panel:#ffffff;
-  --brand-ring:#dde3ee;
-  --brand-text:#0b0d10;
-  --brand-mute:#566072;
-  --brand-gold:#b58500;
-}
-
+*,*::before,*::after{box-sizing:border-box}
 html,body{height:100%}
-body{
-  background:
-    radial-gradient(80% 60% at 50% 0%, rgba(212,175,55,.05), transparent 60%),
-    var(--brand-bg);
-  color:var(--brand-text);
-}
-pre{background:var(--brand-panel);color:var(--brand-text);padding:1rem;border-radius:.75rem;border:1px solid var(--brand-ring);overflow:auto}
-.ne-glass{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.06)}
-*:focus-visible{outline:none;box-shadow:0 0 0 3px var(--brand-gold);border-radius:12px}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+a{text-decoration:none}

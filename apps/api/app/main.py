@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import plan
 from app.core.config import get_settings
+from app.routers import tasks
 
 
 settings = get_settings()
@@ -29,3 +30,4 @@ def home() -> dict[str, str]:
 
 
 app.include_router(plan.router)
+app.include_router(tasks.router)
