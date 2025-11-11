@@ -1,4 +1,51 @@
-*,*::before,*::after{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-a{text-decoration:none}
+/* === GLOBAL RESET === */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* === TAILWIND IMPORTS === */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === CUSTOM BASE === */
+@layer base {
+  body {
+    @apply bg-black text-zinc-200 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* === CUSTOM COMPONENTS === */
+@layer components {
+  .section-title {
+    @apply text-2xl sm:text-3xl font-semibold text-zinc-50;
+  }
+
+  .section-sub {
+    @apply mt-2 max-w-2xl text-zinc-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5
+           text-sm font-semibold text-black shadow hover:brightness-95 active:brightness-90;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5
+           px-4 py-2.5 text-sm font-semibold text-zinc-100 hover:border-white/20;
+  }
+}
