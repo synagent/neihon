@@ -1,12 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  try {
-    const payload = await req.json();
-    console.info("[waitlist]", payload);
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("[waitlist:error]", error);
-    return NextResponse.json({ error: "Unable to capture waitlist request" }, { status: 500 });
-  }
+  const form = await req.formData();
+  const payload = {
+    name: form.get('name'),
+    email: form.get('email'),
+    usecase: form.get('usecase'),
+    receivedAt: new Date().toISOString()
+  };
+  console.log('Waitlist submission:', payload);
+  return NextResponse.json({ ok: true });
 }
