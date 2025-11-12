@@ -1,14 +1,18 @@
-import './globals.css';
-export const metadata = {
-  title: 'Neihon – Voice + AI Companion',
-  description: 'Your day, powered by voice and AI.'
+import type { Metadata } from "next";
+import "./globals.css";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Neihon",
+  description: "Live health, readable docs, and a safe API playground.",
 };
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, background: '#0A0A0A', color: '#fff' }}>
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
